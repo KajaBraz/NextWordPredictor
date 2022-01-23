@@ -4,10 +4,9 @@ from src import data_preparation
 
 
 def create_bigrams(corpus: [str]) -> {(str, str): int}:
-    normalized = data_preparation.adjust_text(corpus)
-    tokenized = data_preparation.tokenize_sentences(normalized)
+    normalized_tokenized = data_preparation.adjust_and_tokenize(corpus)
     bigram_counts = defaultdict(int)
-    for sent in tokenized:
+    for sent in normalized_tokenized:
         words = sent.split(' ')
         for i in range(len(words) - 2):
             bigram = (words[i], words[i + 1])
