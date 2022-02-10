@@ -1,6 +1,6 @@
 import nltk
 from nltk.corpus import brown
-from NextWordPredictor.src import helper_functions, n_grams
+from src import helper_functions, n_grams
 
 nltk.download('brown')
 

@@ -1,4 +1,4 @@
-from NextWordPredictor.src import next_word, database
+from src import next_word, database
 
 bigrams = database.bigrams
 lexicon = database.lexicon

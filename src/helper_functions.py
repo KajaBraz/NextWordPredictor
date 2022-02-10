@@ -1,7 +1,7 @@
 import itertools
 from collections import Counter
 
-from NextWordPredictor.src import data_preparation
+from src import data_preparation
 
 
 def get_lexicon(corpus: [[str]]):

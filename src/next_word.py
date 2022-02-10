@@ -1,4 +1,4 @@
-from NextWordPredictor.src import data_preparation
+from src import data_preparation
 
 SUGGESTED_WORDS_NUMBER = 3
 
