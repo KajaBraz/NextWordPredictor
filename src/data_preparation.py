@@ -4,9 +4,6 @@ START_TAG = '<s>'
 END_TAG = '</s>'
 
 
-# TODO handle not replacing the apostrophes in words (ex. don't)
-# TODO handle e-mail addresses and special symbols appearing between letters, i.e. in the following context: \w_\w
-
 def adjust_and_normalize_nltk_brawn(corpus: [[str]]) -> [[str]]:
     processed_corpus = []
     pattern_special_chars_beginning = re.compile(r'^\W+$')  # match special chars at the beginning of strings ("''")
