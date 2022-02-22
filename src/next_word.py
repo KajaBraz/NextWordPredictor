@@ -14,6 +14,9 @@ def get_next_word(last_word: str, n_grams_dict: {}) -> [str]:
 
 
 def predict_next_word(bigrams_dict, lexicon) -> None:
+    lexicon.pop(data_preparation.START_TAG)
+    lexicon.pop(data_preparation.END_TAG)
+    
     current_word = data_preparation.START_TAG.strip()
     whole_text = ''
     while current_word != '.':
