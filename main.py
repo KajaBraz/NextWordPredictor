@@ -1,7 +1,8 @@
 from src import next_word, database
 
 lexicon = database.lexicon
-bigrams = database.normalized_bigrams
+n_grams = database.normalized_bigrams
 
 if __name__ == '__main__':
-    next_word.predict_next_word(bigrams, lexicon)
+    print(n_grams)
+    next_word.predict_next_word(n_grams, lexicon, database.N_GRAMS)
