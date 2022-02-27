@@ -3,7 +3,7 @@ from collections import defaultdict, Counter
 from src import data_preparation
 
 
-def create_n_grams(corpus: [str], n_grams_param: int) -> {(str): int}:
+def create_n_grams(corpus: [str], n_grams_param: int) -> Counter:
     if n_grams_param < 2:
         return
     n_gram_counts = defaultdict(int)
@@ -13,13 +13,13 @@ def create_n_grams(corpus: [str], n_grams_param: int) -> {(str): int}:
         for i in range(len(words) - n_grams_param):
             n_grams = tuple([words[n] for n in range(i, i + n_grams_param)])
             n_gram_counts[n_grams] += 1
-    return n_gram_counts
+    return Counter(n_gram_counts)
 
 
 # TODO check if normalisation works fine for n_grams other than bigrams
 
-def normalize_n_grams_counts(n_grams_counts: {(str, str): int}, lexicon_counts: Counter) -> {(str, str): float}:
-    normalized_n_grams_counts = {}
+def normalize_n_grams_counts(n_grams_counts: {(str, str): int}, lexicon_counts: Counter) -> Counter:
+    normalized_n_grams_counts = Counter()
     for n_gram, count in n_grams_counts.items():
         total_counts_first_word = lexicon_counts[n_gram[0]]
         normalized_n_grams_counts[n_gram] = count / total_counts_first_word
