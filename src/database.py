@@ -1,10 +1,7 @@
-import nltk
 from nltk.corpus import brown
 from src import helper_functions, n_grams
 
 N_GRAMS = 2
-
-nltk.download('brown')
 
 corpus = brown.sents(categories=['news', 'editorial', 'hobbies'])
 
