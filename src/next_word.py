@@ -1,13 +1,13 @@
 from typing import Tuple
 
-from src import data_preparation
+from src import data_preparation, constants
 
 SUGGESTED_WORDS_NUMBER = 3
 
 
 def get_next_word(last_words: Tuple[str], n_grams_dict: {}) -> [str]:
     possible_next_n_grams = [(n_gram, count) for (n_gram, count) in n_grams_dict.items() if
-                             n_gram[:len(last_words)] == last_words]
+                             n_gram[:len(last_words)] == last_words and n_gram[-1]!=constants.UNKNOWN_WORD_MARKER]
     # print(sorted(possible_next_n_grams, key=lambda x: x[1], reverse=True))
     # print('POSS', possible_next_n_grams)
     if len(possible_next_n_grams) == 0:
@@ -20,6 +20,7 @@ def get_next_word(last_words: Tuple[str], n_grams_dict: {}) -> [str]:
 def predict_next_word(n_grams_dict, lexicon, n_grams) -> None:
     lexicon.pop(data_preparation.START_TAG)
     lexicon.pop(data_preparation.END_TAG)
+    lexicon.pop(constants.UNKNOWN_WORD_MARKER)
     current_word = data_preparation.START_TAG
     whole_text = ''
     current_n_gram = [data_preparation.START_TAG] * (n_grams - 1)
