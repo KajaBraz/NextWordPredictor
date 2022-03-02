@@ -1,14 +1,15 @@
 from collections import defaultdict, Counter
 
-from src import data_preparation
+from src import data_preparation, helper_functions
 
 
-def create_n_grams(corpus: [str], n_grams_param: int) -> Counter:
+def create_n_grams(corpus: [str], n_grams_param: int, lexicon: Counter) -> Counter:
     if n_grams_param < 2:
         return
     n_gram_counts = defaultdict(int)
     normalized_tokenized = data_preparation.adjust_and_normalize_nltk_brawn(corpus, n_grams_param)
-    for sent in normalized_tokenized:
+    marked_unknown = helper_functions.mark_unknown(lexicon, normalized_tokenized)
+    for sent in marked_unknown:
         words = sent
         for i in range(len(words) - n_grams_param):
             n_grams = tuple([words[n] for n in range(i, i + n_grams_param)])
