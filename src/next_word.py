@@ -5,13 +5,15 @@ from src import data_preparation, constants
 SUGGESTED_WORDS_NUMBER = 3
 
 
-def get_next_word(last_words: Tuple[str], n_grams_dict: {}) -> [str]:
+def get_next_words(last_words: Tuple[str], n_grams_dict: {}) -> [str]:
     possible_next_n_grams = [(n_gram, count) for (n_gram, count) in n_grams_dict.items() if
-                             n_gram[:len(last_words)] == last_words and n_gram[-1]!=constants.UNKNOWN_WORD_MARKER]
+                             n_gram[:len(last_words)] == last_words and n_gram[-1] != constants.UNKNOWN_WORD_MARKER]
     # print(sorted(possible_next_n_grams, key=lambda x: x[1], reverse=True))
     # print('POSS', possible_next_n_grams)
     if len(possible_next_n_grams) == 0:
-        return []
+        possible_next_n_grams = [(n_gram, count) for (n_gram, count) in n_grams_dict.items() if
+                                 constants.UNKNOWN_WORD_MARKER in n_gram[:len(last_words)] and
+                                 n_gram[-1] != constants.UNKNOWN_WORD_MARKER]
     most_common = sorted(possible_next_n_grams, key=lambda x: x[1], reverse=True)[:SUGGESTED_WORDS_NUMBER]
     most_common = [n_gram[-1] for n_gram, count in most_common]
     return most_common
@@ -28,7 +30,7 @@ def predict_next_word(n_grams_dict, lexicon, n_grams) -> None:
         # print('***')
         # print(current_n_gram)
         # print('***')
-        possible_next_words = get_next_word(tuple(current_n_gram), n_grams_dict)
+        possible_next_words = get_next_words(tuple(current_n_gram), n_grams_dict)
         missing = SUGGESTED_WORDS_NUMBER - len(possible_next_words)
 
         # TODO when suggesting most common words from lexicon (in case of missing n_grams in dictionary), prevent
