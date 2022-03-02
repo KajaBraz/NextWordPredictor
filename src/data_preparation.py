@@ -1,7 +1,6 @@
 import re
 
-START_TAG = '<s>'
-END_TAG = '</s>'
+from src import constants
 
 
 def adjust_and_normalize_nltk_brawn(corpus: [[str]], n_grams: int) -> [[str]]:
@@ -15,5 +14,5 @@ def adjust_and_normalize_nltk_brawn(corpus: [[str]], n_grams: int) -> [[str]]:
         filtered = map(lambda w: pattern_special_chars_beginning.sub('', w), lower)
         filtered = map(lambda w: pattern_special_chars_end.sub('', w), filtered)
         filtered = filter(lambda w: len(w) != 0, filtered)
-        processed_corpus.append([START_TAG] * (n_grams - 1) + list(filtered) + [END_TAG])
+        processed_corpus.append([constants.START_TAG] * (n_grams - 1) + list(filtered) + [constants.END_TAG])
     return processed_corpus

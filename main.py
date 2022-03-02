@@ -1,13 +1,13 @@
 from collections import Counter
 
-from src import next_word, database
+from src import next_word, database, constants
 
 lexicon = database.lexicon
 n_grams = Counter(database.normalized_bigrams)
 
 if __name__ == '__main__':
     # print(n_grams)
-    next_word.predict_next_word(n_grams, lexicon, database.N_GRAMS)
+    next_word.predict_next_word(n_grams, lexicon, constants.N_GRAMS)
 
     # print(len(lexicon))
 
