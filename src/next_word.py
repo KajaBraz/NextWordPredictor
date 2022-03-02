@@ -6,12 +6,15 @@ from src import constants
 def get_next_words(last_words: Tuple[str], n_grams_dict: {}) -> [str]:
     possible_next_n_grams = [(n_gram, count) for (n_gram, count) in n_grams_dict.items() if
                              n_gram[:len(last_words)] == last_words and n_gram[-1] != constants.UNKNOWN_WORD_MARKER]
-    # print(sorted(possible_next_n_grams, key=lambda x: x[1], reverse=True))
-    # print('POSS', possible_next_n_grams)
-    if len(possible_next_n_grams) == 0:
-        possible_next_n_grams = [(n_gram, count) for (n_gram, count) in n_grams_dict.items() if
-                                 constants.UNKNOWN_WORD_MARKER in n_gram[:len(last_words)] and
-                                 n_gram[-1] != constants.UNKNOWN_WORD_MARKER]
+
+    if len(possible_next_n_grams) < constants.SUGGESTED_WORDS_NUMBER:
+        possible_next_n_grams = possible_next_n_grams + [(n_gram, count) for (n_gram, count) in n_grams_dict.items() if
+                                                         constants.UNKNOWN_WORD_MARKER in n_gram[:len(last_words)] and
+                                                         n_gram[-1] != constants.UNKNOWN_WORD_MARKER and n_gram[
+                                                             -1] not in [suggested_n_gram[-1] for
+                                                                         suggested_n_gram, count in
+                                                                         possible_next_n_grams]]
+
     most_common = sorted(possible_next_n_grams, key=lambda x: x[1], reverse=True)[:constants.SUGGESTED_WORDS_NUMBER]
     most_common = [n_gram[-1] for n_gram, count in most_common]
     return most_common
