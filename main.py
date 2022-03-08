@@ -6,8 +6,7 @@ lexicon = database.lexicon
 n_grams = Counter(database.normalized_bigrams)
 
 if __name__ == '__main__':
-    # print(n_grams)
-    next_word.predict_next_word(n_grams, lexicon, constants.N_GRAMS)
+    next_word.predict_next_word(n_grams, lexicon, constants.MAX_N_GRAMS_SIZE)
 
     # print(len(lexicon))
 

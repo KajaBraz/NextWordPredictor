@@ -4,13 +4,12 @@ from collections import Counter
 from src import data_preparation, constants
 
 
-def get_lexicon(corpus: [[str]], n_grams: int, n_occurrences_to_discard: int):
+def get_lexicon(corpus: [[str]], n_grams: int):
     normalized = data_preparation.adjust_and_normalize_nltk_brawn(corpus, n_grams)
     flattened = list(itertools.chain(*normalized))
     counts = Counter(flattened)
     # counts.pop(data_preparation.START_TAG)
     # counts.pop(data_preparation.END_TAG)
-    counts = remove_rare_items(n_occurrences_to_discard, counts)
     return counts
 
 
