@@ -4,7 +4,7 @@ from src import constants
 
 
 def adjust_and_normalize_nltk_brawn(corpus: [[str]], n_grams: int) -> [[str]]:
-    if n_grams < 2:
+    if n_grams < 1:
         return
     processed_corpus = []
     pattern_special_chars_beginning = re.compile(r'^\W+$')  # match special chars at the beginning of strings ("''")

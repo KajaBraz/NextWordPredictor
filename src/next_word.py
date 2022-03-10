@@ -4,9 +4,6 @@ from src import constants
 
 
 def get_next_words(last_words: Tuple[str], all_n_grams_dict: {int: Counter}, max_n_grams_size: int) -> [str]:
-    print('***')
-    print(last_words)
-    print('***')
     possible_next_n_grams = []
     for n in range(max_n_grams_size, 1, -1):
         if len(possible_next_n_grams) < constants.SUGGESTED_WORDS_NUMBER:
@@ -15,8 +12,6 @@ def get_next_words(last_words: Tuple[str], all_n_grams_dict: {int: Counter}, max
             new_grams = sorted(new_grams, key=lambda x: x[1], reverse=True)[:constants.SUGGESTED_WORDS_NUMBER]
             possible_next_n_grams += [n_gram[-1] for n_gram, count in new_grams]
 
-            print('---', n, '---', len(new_grams), len(possible_next_n_grams))
-            print([n_gram[-1] for n_gram, count in new_grams])
     return possible_next_n_grams
 
 
