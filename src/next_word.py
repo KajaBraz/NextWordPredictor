@@ -38,7 +38,8 @@ def predict_next_word(n_grams_dict: Counter, lexicon: Counter, max_n_grams_size:
             default_words = [word for word, count in lexicon.most_common(missing)]
             possible_next_words = possible_next_words + default_words
         print(f'SUGGESTED WORDS:\n{possible_next_words}')
-        input_text = input('PASTE 1, 2, OR 3, TO CHOOSE ONE OF THE WORDS OR PASTE YOUR OWN WORD AND PRESS ENTER\n')
+        input_text = input('PASTE THE NUMBER THAT CORRESPONDS TO THE WORD (FROM 1 TO 10),'
+                           ' TO CHOOSE ONE OF THE WORDS OR PASTE YOUR OWN WORD AND PRESS ENTER\n')
         input_words = input_text.split(' ')
         current_word = input_words[-1]
 
