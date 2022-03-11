@@ -16,7 +16,7 @@ if __name__ == '__main__':
         print(f'SUGGESTED WORDS:\n{possible_next_words}')
         input_text = input('PASTE THE NUMBER THAT CORRESPONDS TO THE WORD (FROM 1 TO 10),'
                            ' TO CHOOSE ONE OF THE WORDS OR PASTE YOUR OWN WORD AND PRESS ENTER\n')
-        input_words = input_text.split(' ')
+        input_words = input_text.lower().split(' ')
         current_word = input_words[-1]
 
         if current_word.isnumeric() and 1 <= int(current_word) <= constants.SUGGESTED_WORDS_NUMBER:
