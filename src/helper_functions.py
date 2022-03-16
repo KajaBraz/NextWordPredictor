@@ -4,10 +4,17 @@ from collections import Counter
 from src import data_preparation, constants
 
 
-def get_lexicon(corpus: [[str]], n_grams_size: int):
-    normalized = data_preparation.adjust_and_normalize_nltk_brawn(corpus, n_grams_size)
-    flattened = list(itertools.chain(*normalized))
-    counts = Counter(flattened)
+def get_counts(corpus: [[str]], max_n_grams_size: int)-> {int: Counter}:
+    counts = {}
+    for n in range(1, max_n_grams_size + 1):
+        grams = []
+        normalized = data_preparation.adjust_and_normalize_nltk_brawn(corpus, n)
+        for sent in normalized:
+            # grams += [tuple([sent[i] for i in range(len(sent)-n)])]
+            grams += [tuple(sent[i:i + n]) for i in range(len(sent) - n)]
+        # print('helper, get grams', grams)
+        counts[n] = Counter(grams)
+        # print(counts[n].most_common(5))
     # counts.pop(data_preparation.START_TAG)
     # counts.pop(data_preparation.END_TAG)
     return counts
