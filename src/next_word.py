@@ -20,13 +20,10 @@ def predict_next_word(current_n_gram: str, n_grams_dict: {int: {(str): Counter}}
     possible_next_words = get_next_words(tuple(current_n_gram), n_grams_dict, max_n_grams_size)
     missing = constants.SUGGESTED_WORDS_NUMBER - len(possible_next_words)
 
-    # TODO when suggesting most common words from lexicon (in case of missing n_grams in dictionary), prevent
-    #  duplications (it can happen that we have just one matching n_gram in the n_gram dict and if the suggested
-    #  word is ex. "the", the rest of the suggested words will be taken from the lexicon and "the" can be the most
-    #  common word; this way it will be doubled in suggestions)
-
-    if missing > 0:
+    while missing > 0:
         not_considered = {constants.START_TAG, constants.END_TAG}
-        default_words, default_words_counts = zip(*lexicon[1].most_common(missing))
+        not_considered.update(possible_next_words)
+        default_words, default_words_counts = zip(*lexicon[1].most_common(len(not_considered) + missing))
         possible_next_words = possible_next_words + [word[0] for word in default_words if word[0] not in not_considered]
+        missing = constants.SUGGESTED_WORDS_NUMBER - len(possible_next_words)
     return possible_next_words
