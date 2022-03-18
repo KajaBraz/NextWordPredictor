@@ -11,11 +11,8 @@ def create_n_grams(corpus: [str], n_grams_size: int) -> {(str): Counter}:
     for sent in normalized_tokenized:
         words = sent
         for i in range(len(words) - n_grams_size):
-            # cur_key =
             n_gram_occurrences[tuple([words[n] for n in range(i, i + n_grams_size - 1)])] += [
                 words[i + n_grams_size - 1]]
-            # n_grams = tuple([words[n] for n in range(i, i + n_grams_size)])
-            # n_gram_counts[n_grams] += 1
     n_grams_counts = {}
     for preceeding_words, next_words in n_gram_occurrences.items():
         n_grams_counts[preceeding_words] = Counter(next_words)
@@ -29,11 +26,9 @@ def normalize_n_grams_counts(n_grams_counts: {(str): Counter}, lexicon_counts: {
 
     for n_gram_base, next_words in n_grams_counts.items():
         normalized_n_grams_counts[n_gram_base] = Counter()
+        n_gram_size = len(n_gram_base)
+        total_n_gram_base_count = lexicon_counts[n_gram_size][n_gram_base]
         for next_word, count in next_words.items():
-            normalized_n_grams_counts[n_gram_base][next_word] = count
-        # normalized_n_grams_counts[preceding_words] =
+            normalized_n_grams_counts[n_gram_base][next_word] = count / total_n_gram_base_count
 
-    # for n_gram, count in n_grams_counts.items():
-    #     total_counts_first_word = lexicon_counts[n_gram[0]]
-    #     normalized_n_grams_counts[n_gram] = count / total_counts_first_word
     return normalized_n_grams_counts

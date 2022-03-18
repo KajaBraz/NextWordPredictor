@@ -23,6 +23,6 @@ if __name__ == '__main__':
             current_word = possible_next_words[int(current_word) - 1]
 
         current_n_gram = current_n_gram[1:] + [current_word] if len(
-            current_n_gram) >= constants.MAX_N_GRAMS_SIZE else current_n_gram + [current_word]
+            current_n_gram) >= constants.MAX_N_GRAMS_SIZE - 1 else current_n_gram + [current_word]
         whole_text = whole_text + ' ' + current_word
-        print(f'YOUR TEXT:\n{whole_text}\n')
+        print('\nYOUR TEXT:\n', whole_text)

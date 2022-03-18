@@ -14,6 +14,6 @@ def adjust_and_normalize_nltk_brawn(corpus: [[str]], n_grams: int) -> [[str]]:
         filtered = map(lambda w: pattern_special_chars_beginning.sub('', w), lower)
         filtered = map(lambda w: pattern_special_chars_end.sub('', w), filtered)
         filtered = filter(lambda w: len(w) != 0, filtered)
-        updated_sent = [constants.START_TAG] * (n_grams - 1) + list(filtered) + [constants.END_TAG]
+        updated_sent = [constants.START_TAG] * (n_grams) + list(filtered) + [constants.END_TAG]
         processed_corpus.append(updated_sent)
     return processed_corpus
