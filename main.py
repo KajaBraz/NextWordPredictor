@@ -13,7 +13,7 @@ if __name__ == '__main__':
     while current_word != '.':
         possible_next_words = next_word.predict_next_word(current_n_gram, n_grams, lexicon, constants.MAX_N_GRAMS_SIZE)
 
-        print(f'SUGGESTED WORDS:\n{possible_next_words}')
+        print(f'\nSUGGESTED WORDS:\n{possible_next_words}')
         input_text = input('PASTE THE NUMBER THAT CORRESPONDS TO THE WORD (FROM 1 TO 10),'
                            ' TO CHOOSE ONE OF THE WORDS OR PASTE YOUR OWN WORD AND PRESS ENTER\n')
         input_words = input_text.lower().split(' ')
