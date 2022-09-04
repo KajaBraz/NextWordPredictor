@@ -1,9 +1,12 @@
-from collections import Counter
+import pickle
 
-from src import next_word, database, constants
+from src import next_word, create_save_model, constants
 
-lexicon = database.lexicon
-n_grams = Counter(database.normalized_bigrams)
+if not constants.MODEL_EXISTS:
+    create_save_model.create_model()
+
+model_n_grams = pickle.load(open(constants.MODEL_N_GRAMS, 'rb'))
+model_lexicon = pickle.load(open(constants.MODEL_LEXICON, 'rb'))
 
 if __name__ == '__main__':
     whole_text = ''
@@ -11,7 +14,8 @@ if __name__ == '__main__':
     current_word = current_n_gram[-1]
 
     while current_word != '.':
-        possible_next_words = next_word.predict_next_word(current_n_gram, n_grams, lexicon, constants.MAX_N_GRAMS_SIZE)
+        possible_next_words = next_word.predict_next_word(current_n_gram, model_n_grams, model_lexicon,
+                                                          constants.MAX_N_GRAMS_SIZE)
 
         print(f'\nSUGGESTED WORDS:\n{possible_next_words}')
         input_text = input('PASTE THE NUMBER THAT CORRESPONDS TO THE WORD (FROM 1 TO 10),'
