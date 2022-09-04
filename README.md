@@ -5,4 +5,6 @@ With the use of the nltk's brown corpus as training data, once adequately prepro
 
 The users are given suggestions of possible next words and in case their needs are not met, they may type their own word.
 
+To run the program, you have to execute the "main.py" file.
+
 ![obraz](https://user-images.githubusercontent.com/58611238/185006447-aebe399c-5953-41d5-9296-a873f99a6450.png)
